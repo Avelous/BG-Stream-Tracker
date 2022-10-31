@@ -1,0 +1,16 @@
+type MultiFundStreams @entity {
+  id: ID!
+  sender: Bytes! # address
+  streams: [String!] # address[]
+  amounts: [BigInt!] # BigInt[]
+  reasons: [String!] # String[]
+}
+
+
+type FundedStream @entity {
+  id: ID!
+  sender: Bytes! # address
+  streams: [String!] # address[]
+  amounts: [BigInt!] # BigInt[]
+  # reasons: [String!] # String[]
+}

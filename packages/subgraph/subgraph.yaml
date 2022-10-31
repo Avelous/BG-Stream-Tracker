@@ -1,25 +1,26 @@
 specVersion: 0.0.4
 schema:
-  file: ./src/schema.graphql
+  file: ./schema.graphql
+features:
+  - nonFatalErrors  
 dataSources:
-  - kind: ethereum/contract
-    name: YourContract
-    network: localhost
+  - kind: ethereum
+    name: StreamMultiFunder
+    network: mainnet
     source:
-      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3"
-      abi: YourContract
-      startBlock: 1
+      address: "0xCC756617C97a05aC472fD8Ab92C88F2A9cb681EC"
+      abi: StreamMultiFunder
+      startBlock: 14810180
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
       language: wasm/assemblyscript
       entities:
-        - Purpose
-        - Sender
+        - MultiFundStreams
       abis:
-        - name: YourContract
-          file: ./abis/localhost_YourContract.json
+        - name: StreamMultiFunder
+          file: ./abis/StreamMultiFunder.json
       eventHandlers:
-        - event: SetPurpose(address,string)
-          handler: handleSetPurpose
-      file: ./src/mapping.ts
+        - event: MultiFundStreams(indexed address,address[],uint256[],string[])
+          handler: handleMultiFundStreams
+      file: ./src/stream-multi-funder.ts
